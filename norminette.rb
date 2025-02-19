@@ -8,16 +8,20 @@ class Norminette < Formula
   license "MIT"
   head "https://github.com/42School/norminette.git", branch: "master"
 
-  depends_on "python" => ">=3.8"
+  depends_on "python@3.x"
 
   def install
+    python_version = Language::Python.major_minor_version "python3"
+    if python_version < Version.create("3.8")
+      odie "Python 3.8 or newer is required."
+    end
+
     virtualenv_install_with_resources
   end
 
   test do
-    assert_match "norminette", shell_output("#{bin}/norminette --version", 0)
-    (testpath/"blank.c").write <<~EOF
-    EOF
+    assert_match "norminette", shell_output("#{bin}/norminette --version")
+    (testpath/"blank.c").write ""
     output = shell_output("#{bin}/norminette blank.c")
     assert_equal "blank.c: OK!", output.chomp
     (testpath/"test.c").write <<~EOF

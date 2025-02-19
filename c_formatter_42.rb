@@ -8,9 +8,14 @@ class CFormatter42 < Formula
   license "GPL-3.0"
   head "https://github.com/dawnbeen/c_formatter_42.git", branch: "master"
 
-  depends_on "python" => ">=3.8"
+  depends_on "python@3.x"
 
   def install
+    python_version = Language::Python.major_minor_version "python3"
+    if python_version < Version.create("3.8")
+      odie "Python 3.8 or newer is required."
+    end
+
     virtualenv_install_with_resources
   end
 
@@ -21,7 +26,7 @@ class CFormatter42 < Formula
         return 0;
       }
     EOS
-    output = shell_output("#{bin}/c_formatter_42 #{testpath}/test.c", 0)
+    output = shell_output("#{bin}/c_formatter_42 #{testpath}/test.c")
     assert_match "Writing to #{testpath}/test.c", output
     formatted_content = (testpath/"test.c").read
     expected_output = "int\tmain(void)\n{\n\treturn (0);\n}\n"
