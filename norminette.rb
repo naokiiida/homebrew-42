@@ -8,7 +8,7 @@ class Norminette < Formula
   license "MIT"
   head "https://github.com/42School/norminette.git", branch: "master"
 
-  depends_on "python@3.x"
+  depends_on "python"
 
   def install
     python_version = Language::Python.major_minor_version "python3"
