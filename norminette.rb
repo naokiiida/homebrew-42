@@ -10,7 +10,7 @@ class Norminette < Formula
   sha256 "66356de519fdd361043ea1473ea5317b6087ce60c9f1f2fb172aaf3f7fcfe98c"
   license "MIT"
 
-  depends_on "python"
+  depends_on "python" => ">=3.8"
 
   def install
     virtualenv_install_with_resources
@@ -26,11 +26,19 @@ class Norminette < Formula
     #
     # The installed folder is not in the path, so use the entire path to any
     # executables being tested: `system "#{bin}/program", "do", "something"`.
-    test = testpath/"test.c"
-    test.write.("#include <stdio.h>")
-    output = shell_output("#{bin}/norminette #{}")
-#    system "#{bin}/norminette"
-#    assert_equal "test.c: Error!
-#Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header", (testpath/"test.c").read.chomp
+    (testpath/"test.c").write <<~EOF
+      #include <stdio.h>
+    EOF
+    output = shell_output("#{bin}/norminette test.c")
+    expect = <<~EOF
+      test.c: Error!
+      Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header
+    EOF
+    assert_equal expect.chomp, output.chomp
+    assert_match "norminette", shell_output("#{bin}/norminette --version", 2)
+    (testpath/"blank.c").write <<~EOF
+        EOF
+    output = shell_output("#{bin}/norminette blank.c")
+    assert_match "blank.c: OK!", output.chomp
   end
 end

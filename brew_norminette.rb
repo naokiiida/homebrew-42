@@ -15,9 +15,8 @@ class Norminette < Formula
 
   test do
     (testpath/"blank.c").write <<~EOF
-     EOF
-
+    EOF
     output = shell_output("#{bin}/norminette #{testpath/"blank.c"}")
-    assert_match "blank.c: OK!\n", output
+    assert_match "blank.c: OK!", output.chomp
   end
 end
