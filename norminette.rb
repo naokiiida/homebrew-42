@@ -6,6 +6,7 @@ class Norminette < Formula
   url "https://files.pythonhosted.org/packages/32/7d/a7bd0a9eab47b0e23874996d62bc9af39328b7e9e939f29340330d56f4c5/norminette-3.3.55.tar.gz"
   sha256 "66356de519fdd361043ea1473ea5317b6087ce60c9f1f2fb172aaf3f7fcfe98c"
   license "MIT"
+  head "https://github.com/42School/norminette.git", branch: "master"
 
   depends_on "python" => ">=3.8"
 

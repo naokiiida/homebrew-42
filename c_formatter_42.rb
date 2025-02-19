@@ -6,6 +6,7 @@ class CFormatter42 < Formula
   url "https://files.pythonhosted.org/packages/77/fa/edee608023d6adc567d1060b4b889b6279e0f99ff3b3cc58bfa4eda069dd/c_formatter_42-0.2.8.tar.gz"
   sha256 "da31b1ab4cdc92dd363ae791244cf063982e29c9fc54dbde0f22fce20a2b057b"
   license "GPL-3.0"
+  head "https://github.com/dawnbeen/c_formatter_42.git", branch: "master"
 
   depends_on "python" => ">=3.8"
 
