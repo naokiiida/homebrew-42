@@ -12,10 +12,9 @@ class Norminette < Formula
 
   def install
     python_version = Language::Python.major_minor_version "python3"
-    if python_version < Version.create("3.8")
+    if python_version < Version.new("3.8")
       odie "Python 3.8 or newer is required."
     end
-
     virtualenv_install_with_resources
   end
 
