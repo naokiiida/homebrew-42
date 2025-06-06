@@ -1,3 +1,7 @@
+# typed: strict
+# frozen_string_literal: true
+
+# Homebrew formula for Norminette, 42's C code style checker
 class Norminette < Formula
   include Language::Python::Virtualenv
 

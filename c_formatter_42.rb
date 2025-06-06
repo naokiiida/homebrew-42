@@ -1,3 +1,7 @@
+# typed: strict
+# frozen_string_literal: true
+
+# Homebrew formula for c_formatter_42, a C language formatter for 42 norminette
 class CFormatter42 < Formula
   include Language::Python::Virtualenv
 
